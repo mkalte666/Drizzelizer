@@ -75,6 +75,7 @@ class Party : Entity
             import std.stdio;
             write("Mean Sound volume: ");
             writeln(mean);
+            double scaledMean = mean/50000.0;
             //vec4 c = vec4(0.1,cast(float)(mean)/50000.0, 1.0, 1.0);
             //_quad.color = c;
 
@@ -89,9 +90,10 @@ class Party : Entity
             
             for(int i=(SSIZE/SETSIZE),j=1; i<absTrans.length&&j<SETSIZE; i+=(SSIZE/SETSIZE/2)) {
                 int freq = i * SRATE / SSIZE; 
-                _quads[j].color = vec4(mean/50000.0,1.0-mean/50000.0,1.0,absTrans[i]/1000000.0+0.01);
+                
+                _quads[j].color = vec4(0.5+(0.0-scaledMean),1.0-0.5-(0.0-scaledMean),1.0,absTrans[i]/800000.0+0.01);
                 auto s = _quads[j].scale;
-                s.y = absTrans[i]/1000000.0+0.01;
+                s.y = absTrans[i]/800000.0+0.01;
                 _quads[j].scale= s;
                 j++;
             }
